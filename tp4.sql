@@ -1,0 +1,70 @@
+-- TP4_BARI_GHOUDAN
+
+-- ex 1
+DECLARE
+a number(2) := 1;
+b number(2) := 2;
+c number(2);
+BEGIN 
+c:= a;
+a:=b;
+b:=c;
+DBMS_OUTPUT.PUT_LINE('a :: '||a||'b :: '||b);
+END;
+/
+-- ex 2
+
+DECLARE
+a number(20) := 10;
+BEGIN 
+FOR i in 1..a LOOP
+EXIT WHEN i>=9;
+a:=a*i;
+END LOOP;
+DBMS_OUTPUT.PUT_LINE('a = '||a);
+END;
+/
+-- ex 3
+
+DECLARE
+    dept_id DEPARTMENTS.DEPARTMENT_id%TYPE;
+BEGIN 
+SELECT MAX(DEPARTMENT_id) INTO dept_id
+FROM DEPARTMENTS;
+
+INSERT INTO DEPARTMENTS VALUES (dept_id+10,' lol',null,null);
+END;
+/
+-- ex 4
+
+DECLARE
+    dept_id DEPARTMENTS.DEPARTMENT_id%TYPE;
+BEGIN 
+SELECT MAX(DEPARTMENT_id) INTO dept_id
+FROM DEPARTMENTS;
+END;
+/
+-- ex 5
+
+DECLARE
+    dept_id DEPARTMENTS.DEPARTMENT_id%TYPE;
+    dept_name DEPARTMENTS.DEPARTMENT_NAME%TYPE;
+BEGIN 
+SELECT DEPARTMENT_id,DEPARTMENT_NAME INTO dept_id,dept_name
+FROM DEPARTMENTS
+WHERE DEPARTMENT_id = ( select max(DEPARTMENT_id) from DEPARTMENTS);
+DBMS_OUTPUT.PUT_LINE(TO_CHAR(dept_id)|| ' ' || dept_name);
+END;
+/
+-- ex 6
+
+DECLARE
+    dept_id DEPARTMENTS.DEPARTMENT_id%TYPE;
+BEGIN 
+SELECT MAX(DEPARTMENT_id) INTO dept_id
+FROM DEPARTMENTS;
+UPDATE DEPARTMENTS
+SET location_id =2500
+WHERE DEPARTMENT_id = dept_id;
+END;
+/
